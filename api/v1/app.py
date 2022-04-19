@@ -18,6 +18,7 @@ def teardown(exc):
     """Tear down"""
     storage.close()
 
+
 if __name__ == '__main__':
     app.run(host=os.getenv('HBNB_API_HOST'),
             port=os.getenv('HBNB_API_PORT'),
