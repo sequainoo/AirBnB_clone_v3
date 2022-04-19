@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Flask application module"""
 import os
 
 from flask import Flask, jsonify
@@ -7,8 +8,10 @@ from .views.index import *
 from models import storage
 from .views import app_views
 
+
 app = Flask(__name__)
-app.register_blueprint(app_views, url_prefix='/api/v1')
+app.register_blueprint(app_views)
+
 
 @app.teardown_appcontext
 def teardown(exc):
