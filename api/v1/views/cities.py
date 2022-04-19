@@ -22,7 +22,8 @@ def get_state_cities(state_id):
     return jsonify(cities)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
+                 strict_slashes=False)
 def create_state_city(state_id):
     """Returns the list of all city objects"""
     state = storage.get('State', state_id)
@@ -54,7 +55,7 @@ def get_city(city_id):
 def delete_city(city_id):
     """Deletes the city object of city_id from storage"""
     # first get objec and delete from storage
-    city = storage.get('city', city_id)
+    city = storage.get('City', city_id)
     if not city:
         abort(404)
     cit.delete()
