@@ -57,6 +57,8 @@ class FileStorage:
 
     def count(self, cls=None):
         """Return counts of all classes or a class"""
+        if type(cls) is str:
+            cls = classes[cls]
         return len(self.all(cls).values())
 
     def reload(self):
