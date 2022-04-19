@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """handle general route
     /status:    returns "status":"OK"
 """
