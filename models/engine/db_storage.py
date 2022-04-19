@@ -57,6 +57,8 @@ class DBStorage:
 
     def get(self, cls, id):
         """return one object"""
+        if type(cls) is str:
+            cls = classes[cls]
         return self.__session.query(cls).get(id)
 
     def count(self, cls=None):

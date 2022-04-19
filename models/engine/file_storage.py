@@ -27,6 +27,8 @@ class FileStorage:
     def all(self, cls=None):
         """returns the dictionary __objects"""
         if cls is not None:
+            if type(cls) is str:
+                cls = classes[cls]
             new_dict = {}
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
@@ -52,6 +54,8 @@ class FileStorage:
         """get an object from storage"""
         if not cls or not id:
             return None
+        if type(cls) is str:
+            cls = classes[cls]
         key = cls.__name__ + '.' + id
         return self.__objects.get(key, None)
 
