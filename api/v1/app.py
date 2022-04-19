@@ -13,6 +13,12 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 
+@app.errorhandler(404)
+def errorhandler(err):
+    """Error handler for 404 errors"""
+    return jsonify({'error': 'Not found'}), 404
+
+
 @app.teardown_appcontext
 def teardown(exc):
     """Tear down"""
