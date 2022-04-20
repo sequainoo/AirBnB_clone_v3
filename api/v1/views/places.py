@@ -12,7 +12,7 @@ from models.city import City
 @app_views.route('/cities/<city_id>/places', strict_slashes=False)
 def get_city_places(city_id):
     """Returns the list of all place objects"""
-    city = storage.all('City', city_id)
+    city = storage.get('City', city_id)
     if not city:
         abort(404)
     places = storage.all('Place')
@@ -39,7 +39,7 @@ def create_place(city_id):
             abort(404)
         if 'name' not in data:
             return jsonify({'error': 'Missing name'}), 400
-        place = place(user_id=data['user_id'],
+        place = Place(user_id=data['user_id'],
                       name=data['name'],
                       number_rooms=data.get('number_rooms', 0),
                       number_bathrooms=data.get('number_bathrooms', 0),
@@ -85,7 +85,7 @@ def update_place(place_id):
     try:
         data = request.get_json()
         if not data:
-            return jsonify({'error': 'Not a json data'}), 400
+            return jsonify({'error': 'Not a JSON'}), 400
         place.name = data.get('name', place.name)
         place.number_bathrooms = data.get('number_bathrooms',
                                           place.first_name)
@@ -99,4 +99,4 @@ def update_place(place_id):
         place.save()
         return jsonify(place.to_dict()), 200
     except BadRequest:
-        return jsonify({'error': 'Not a json data'}), 400
+        return jsonify({'error': 'Not a JSON'}), 400
