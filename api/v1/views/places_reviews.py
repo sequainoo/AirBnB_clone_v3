@@ -14,7 +14,7 @@ def get_reviews(place_id):
     place = storage.get('Place', place_id)
     if not place:
         abort(404)
-    reviews = storage.all('review')
+    reviews = storage.all('Review')
     reviews = [review.to_dict()
                for review in reviews.values()
                if review.place_id == place_id]
