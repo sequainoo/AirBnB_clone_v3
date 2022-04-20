@@ -21,7 +21,8 @@ def get_reviews(place_id):
     return jsonify(reviews)
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['POST'], strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['POST'],
+                 strict_slashes=False)
 def create_review(place_id):
     """Returns the list of all review objects"""
     place = storage.get("Place", place_id)
@@ -33,6 +34,8 @@ def create_review(place_id):
             return jsonify({'error': 'Not a JSON'}), 400
         if 'user_id' not in data:
             return jsonify({'error': 'Missing user_id'}), 400
+        if not storage.get('User', user_id):
+            abort(404)
         if 'text' not in data:
             return jsonify({'error': 'Missing text'}), 400
         review = Review(user_id=data['user_id'],
