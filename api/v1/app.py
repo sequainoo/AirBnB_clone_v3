@@ -3,6 +3,7 @@
 import os
 
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from .views.index import *
 from models import storage
@@ -10,6 +11,7 @@ from .views import app_views
 
 
 app = Flask(__name__)
+CORS(app, origins='0.0.0.0')
 app.register_blueprint(app_views)
 
 
